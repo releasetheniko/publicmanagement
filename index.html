@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Public Management — Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #16181f;
+    --bg2: #1c1f2a;
+    --bg3: #21242f;
+    --surface: #252836;
+    --surface2: #2c3042;
+    --accent: #7aacf5;
+    --accent2: #a48dcc;
+    --accent3: #5ec9b2;
+    --accent4: #e8a07a;
+    --text: #dde1ec;
+    --text2: #8f99b5;
+    --text3: #555e7a;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.11);
+    --tag-bg: rgba(122,172,245,0.1);
+    --tag-text: #90bdf8;
+    --highlight: rgba(122,172,245,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 260px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-header .course-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .sidebar-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .sidebar-header .prof {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  .nav-section {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 4px 20px 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    color: var(--text2);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.15s;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover {
+    background: var(--highlight);
+    color: var(--text);
+    border-left-color: var(--border2);
+  }
+
+  .nav-item.active {
+    background: rgba(79,142,247,0.1);
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  .nav-item .num {
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 20px;
+    color: var(--text3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .nav-item.active .num { color: var(--accent); }
+
+  /* MAIN CONTENT */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  .section {
+    display: none;
+    padding: 48px 64px;
+    max-width: 900px;
+  }
+
+  .section.active { display: block; }
+
+  /* HERO */
+  .hero {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lecture-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .section .subtitle {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  .meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .meta-pill {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    background: var(--surface);
+    color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+
+  /* MIND MAP / OVERVIEW CARD */
+  .overview-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+
+  .overview-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    margin-bottom: 16px;
+  }
+
+  .mind-map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .mind-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 12px 14px;
+  }
+
+  .mind-node .node-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .mind-node .node-text {
+    font-size: 12.5px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* CONTENT BLOCKS */
+  .content-block {
+    margin-bottom: 32px;
+  }
+
+  .content-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .content-block h3::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .content-block p {
+    color: var(--text2);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: var(--surface);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .def-box .def-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent3);
+    margin-bottom: 6px;
+  }
+
+  .def-box .def-text {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .compare-col {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .compare-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-col.pro h4 { color: var(--accent); }
+  .compare-col.con h4 { color: #e06c75; }
+  .compare-col.neutral1 h4 { color: var(--accent); }
+  .compare-col.neutral2 h4 { color: var(--accent2); }
+  .compare-col.neutral3 h4 { color: var(--accent3); }
+
+  .compare-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .compare-col ul li {
+    font-size: 13px;
+    color: var(--text2);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .compare-col ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text3);
+    font-size: 11px;
+  }
+
+  /* 3-col grid */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .three-col .compare-col h4 {
+    font-size: 12px;
+  }
+
+  /* FACT LIST */
+  .fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .fact-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-radius: 7px;
+    border: 1px solid var(--border);
+  }
+
+  .fact-item .fact-icon {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .fact-item .fact-text {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  .fact-item .fact-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* EXAM QUESTIONS */
+  .exam-section {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 24px;
+    margin-top: 36px;
+  }
+
+  .exam-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    margin-bottom: 16px;
+  }
+
+  .exam-q {
+    padding: 14px 16px;
+    border-radius: 7px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+
+  .exam-q .q-type {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .exam-q.knowledge .q-type { color: var(--accent3); }
+  .exam-q.essay .q-type { color: var(--accent4); }
+
+  .exam-q .q-text {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .hint-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 5px 11px;
+    border-radius: 5px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text3);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .hint-btn:hover {
+    background: var(--highlight);
+    color: var(--accent);
+    border-color: rgba(122,172,245,0.25);
+  }
+
+  .hint-btn .hint-arrow {
+    font-size: 9px;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .hint-btn.open .hint-arrow { transform: rotate(90deg); }
+
+  .hint-answer {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 14px;
+    background: rgba(122,172,245,0.05);
+    border-left: 2px solid rgba(122,172,245,0.3);
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .hint-answer.visible { display: block; }
+
+  /* AUTHORS */
+  .authors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .author-chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  /* HOME page */
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .home-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .home-card:hover {
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+
+  .home-card .card-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .home-card .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .home-card .card-topics {
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.5;
+  }
+
+  /* TAGS INLINE */
+  .inline-tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    background: rgba(123, 94, 167, 0.15);
+    color: #b09fd4;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 0 1px;
+  }
+
+  /* highlight callout */
+  .callout {
+    background: rgba(79,142,247,0.07);
+    border: 1px solid rgba(79,142,247,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+  }
+
+  .callout .callout-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  .callout .callout-text {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  @media (max-width: 900px) {
+    .sidebar { width: 220px; }
+    .main { margin-left: 220px; }
+    .section { padding: 32px 28px; }
+    .three-col { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="course-tag">UGent · Public Management</div>
+    <h1>Public Management</h1>
+    <div class="prof">Prof. dr. Ben Suykens</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" onclick="show('home')">
+      <span class="num">—</span> Course Overview
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Lectures</div>
+    <a class="nav-item" onclick="show('l1')"><span class="num">01</span> Introduction</a>
+    <a class="nav-item" onclick="show('l2')"><span class="num">02</span> Public Service Performance</a>
+    <a class="nav-item" onclick="show('l3')"><span class="num">03</span> Public Management Reforms</a>
+    <a class="nav-item" onclick="show('l4')"><span class="num">04</span> Public Value(s)</a>
+    <a class="nav-item" onclick="show('l5')"><span class="num">05</span> Organizational Scale</a>
+    <a class="nav-item" onclick="show('l6')"><span class="num">06</span> Red Tape</a>
+    <a class="nav-item" onclick="show('l7')"><span class="num">07</span> Strategic Management</a>
+    <a class="nav-item" onclick="show('l8')"><span class="num">08</span> Managing Politicians</a>
+    <a class="nav-item" onclick="show('l9')"><span class="num">09</span> Managing Street-Level Bureaucrats</a>
+    <a class="nav-item" onclick="show('l10')"><span class="num">10</span> Managing Citizens</a>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- HOME -->
+<div class="section active" id="home">
+  <div class="hero">
+    <div class="lecture-badge">UGent · Dept. Public Governance &amp; Management</div>
+    <h2>Public Management</h2>
+    <p class="subtitle">A complete study guide covering all 10 lectures. Click any card to jump to the lecture summary, key concepts, and exam questions.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Closed-book written exam</span>
+      <span class="meta-pill">10 lectures</span>
+      <span class="meta-pill">Textbook: MPOW (George, 2021)</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Exam tip</div>
+    <div class="callout-text">All things addressed in class, in the readings, or in guest lectures can appear on the exam. Keep up with the work throughout the semester — it builds cumulatively.</div>
+  </div>
+
+  <div class="home-grid">
+    <div class="home-card" onclick="show('l1')">
+      <div class="card-num">Lecture 01</div>
+      <div class="card-title">Introduction to Public Management</div>
+      <div class="card-topics">What, who & so what · Publicness puzzle · Multi-level approach · Sector size</div>
+    </div>
+    <div class="home-card" onclick="show('l2')">
+      <div class="card-num">Lecture 02</div>
+      <div class="card-title">Public Service Performance</div>
+      <div class="card-topics">IOO model · Measurement dilemmas · Organizational responses · Dark side</div>
+    </div>
+    <div class="home-card" onclick="show('l3')">
+      <div class="card-num">Lecture 03</div>
+      <div class="card-title">Public Management Reforms</div>
+      <div class="card-topics">OPA · NPM · NPG · Bureaucracy building blocks · Cross-country variation</div>
+    </div>
+    <div class="home-card" onclick="show('l4')">
+      <div class="card-num">Lecture 04</div>
+      <div class="card-title">Public Value(s)</div>
+      <div class="card-topics">Public values vs. public value · Value conflicts · Hybrid organizing · Real estate case</div>
+    </div>
+    <div class="home-card" onclick="show('l5')">
+      <div class="card-num">Lecture 05</div>
+      <div class="card-title">Organizational Scale</div>
+      <div class="card-topics">Big is better vs. small is beautiful · Mergers · Networks · Administrative capacity</div>
+    </div>
+    <div class="home-card" onclick="show('l6')">
+      <div class="card-num">Lecture 06</div>
+      <div class="card-title">Red Tape</div>
+      <div class="card-topics">Bozeman definition · Internal vs. external · Origins · Effects meta-analysis · Reduction</div>
+    </div>
+    <div class="home-card" onclick="show('l7')">
+      <div class="card-num">Lecture 07</div>
+      <div class="card-title">Strategic Management</div>
+      <div class="card-topics">Mission/vision/goals · Approaches · Resource-based view · Public sector context</div>
+    </div>
+    <div class="home-card" onclick="show('l8')">
+      <div class="card-num">Lecture 08</div>
+      <div class="card-title">Managing Politicians</div>
+      <div class="card-topics">Old vs. modern view · Principal-agent · Political astuteness · Guerrilla government</div>
+    </div>
+    <div class="home-card" onclick="show('l9')">
+      <div class="card-num">Lecture 09</div>
+      <div class="card-title">Managing Street-Level Bureaucrats</div>
+      <div class="card-topics">Pay-for-performance · Public service motivation · Policy alienation</div>
+    </div>
+    <div class="home-card" onclick="show('l10')">
+      <div class="card-num">Lecture 10</div>
+      <div class="card-title">Managing Citizens</div>
+      <div class="card-topics">Administrative burden · Learning/compliance/psychological costs · Co-production · NPG</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 1 -->
+<div class="section" id="l1">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 01</div>
+    <h2>Introduction to Public Management</h2>
+    <p class="subtitle">Prof. dr. Ben Suykens · Dept. of Public Governance and Management</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Publicness puzzle</span>
+      <span class="meta-pill">Multi-level approach</span>
+      <span class="meta-pill">Bozeman &amp; Bretschneider 1994</span>
+      <span class="meta-pill">Hammerschmid et al. 2016</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Definition</div><div class="node-text">Managing public organizations · Done by public managers · Multi-disciplinary field (politics, sociology, economics, org. theory)</div></div>
+      <div class="mind-node"><div class="node-label">Publicness</div><div class="node-text">Core (legal type = binary) vs. Dimensional (scale) — Resources · Goals/Agenda · Communication</div></div>
+      <div class="mind-node"><div class="node-label">Who?</div><div class="node-text">Top, middle, line managers — not a single mold · Different from SLBs · 6,701 EU top managers surveyed</div></div>
+      <div class="mind-node"><div class="node-label">So What?</div><div class="node-text">Economically very large public sector · Positive relationship with public sector performance</div></div>
+      <div class="mind-node"><div class="node-label">Approach</div><div class="node-text">Macro (concepts &amp; theories) · Meso (organizational practices) · Micro (SLBs, politicians, citizens)</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>What is Public Management?</h3>
+    <p>Public management is about <strong style="color:var(--text)">managing public organizations</strong> — organizations characterized by the drive to create public value. It is done by public managers at different levels and is studied because the public sector is economically very large and its performance has direct societal consequences.</p>
+    <div class="callout">
+      <div class="callout-label">Exam building blocks</div>
+      <div class="callout-text">The exam tests three types of knowledge: <strong style="color:var(--text)">Knowledge</strong> (concepts, theories), <strong style="color:var(--text)">Insights</strong> (statements, articles), and <strong style="color:var(--text)">Application</strong> (cases). All slides, classes, and articles are fair game.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Core vs. Dimensional Approach to "Public"</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Core Approach (binary)</h4>
+        <ul>
+          <li>Legal type as the criterion: government-owned vs. privately-owned</li>
+          <li>Speaks to common sense — straightforward to apply</li>
+          <li>Limitation: misses hybrid organizations (universities, WADA, NPOs)</li>
+          <li>Case: WADA (World Anti-Doping Agency) — public mandate, private governance</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Dimensional Approach (scale)</h4>
+        <ul>
+          <li>More or less public depending on externally imposed political authority</li>
+          <li>Risk: comparing apples and oranges when measuring</li>
+          <li>Three dimensions: % public funding (resources), agenda shift without public funding (goals), phone calls with government (communication)</li>
+          <li>Bozeman &amp; Bretschneider (1994): both approaches are complementary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Publicness Puzzle (Bozeman &amp; Bretschneider, 1994)</h3>
+    <p>Goal: test whether a dimensional understanding of publicness provides additional explanatory power over the core approach. Case: R&amp;D labs — do public and private labs differ in their focus on patents/licenses (private output) vs. scientific publications (public output)?</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Main finding:</strong> Both approaches are complementary. The broad-brush view ("does it matter?") needs to be combined with the fine-grained view ("if so, which dimensions matter?").</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Three publicness dimensions:</strong> Resources (e.g., % grant funding), Goals/Agenda (e.g., "without government financing there would be a major shift in our R&amp;D focus"), and Communication (e.g., frequency of contact with government personnel).</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Practical implication:</strong> Organizations like universities have multiple legal forms, mixed funding (student fees + subsidies), and boards with politically appointed members — they score high on publicness dimensions even without being formally government-owned.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Who Are Public Managers?</h3>
+    <p>Public managers operate at three hierarchical levels — top (head of organization), middle (head of division), and line (head of team/department). They are explicitly <em>not</em> street-level bureaucrats, who deliver services directly to citizens with frontline discretion.</p>
+    <div class="def-box">
+      <div class="def-label">Hammerschmid et al. (2016) — Survey of 6,701 Top EU Public Managers</div>
+      <div class="def-text">25% have degrees in business/management/economics · 24% in law · 23% in engineering/natural sciences · 13% in political science · 15% in social sciences. And: 21% had at least 5 years in the private sector, 18% in the nonprofit sector. Public managers are not a single mold — they come from diverse disciplinary and sectoral backgrounds.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Multi-Level Approach</h3>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Macro Level</h4>
+        <ul>
+          <li>Concepts and theories invariable for all PSOs</li>
+          <li>Reform paradigms (OPA, NPM, NPG)</li>
+          <li>Public value, performance frameworks</li>
+          <li>Red tape, governance systems</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Meso Level</h4>
+        <ul>
+          <li>Organizational practices implemented differently per PSO</li>
+          <li>Strategic management, organizational scale</li>
+          <li>Mergers, networks, performance management</li>
+          <li>Context-dependent decisions</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Micro Level</h4>
+        <ul>
+          <li>Relationships with key actors</li>
+          <li>Street-level bureaucrats (SLBs)</li>
+          <li>Politicians in the political-administrative sphere</li>
+          <li>Citizens as users, customers, co-producers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Inside vs. Outside</div>
+      <div class="callout-text">The multi-actor sphere outside the organization includes companies, nonprofits, consultancy firms, and universities. The societal sphere includes citizens. The political-administrative sphere includes politicians. Inside the organization are the different levels of management and SLBs. Public management is about navigating all of these simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Bozeman &amp; Bretschneider</span>
+      <span class="author-chip">Hammerschmid et al.</span>
+      <span class="author-chip">George (2021)</span>
+      <span class="author-chip">Lipsky (SLBs)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">What does it mean to say that publicness is "dimensional rather than binary"? Use the three dimensions of publicness to illustrate your answer with an example of a hybrid organization.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Rather than simply being "public" or "private," organizations exist on a continuum. Bozeman's three dimensions are: <strong>Resources</strong> (where does funding come from — taxes vs. market revenue?), <strong>Goals/Agenda</strong> (whose interests are served — the public broadly, or paying clients?), and <strong>Communication/Accountability</strong> (to whom must the organization answer?). A nonprofit hospital receives public subsidies (public resources), serves a broad community mission (public goals), but also competes for patients and charges fees (private elements) — making it a hybrid with partial publicness on each dimension.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the difference between street-level bureaucrats and public managers. Why does this distinction matter for understanding public management?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Street-level bureaucrats (SLBs) are frontline workers (teachers, social workers, police officers) who interact directly with citizens and exercise discretion in applying policy. Public managers operate at meso or macro levels — they set strategy, allocate resources, and manage organizations rather than directly delivering services. The distinction matters because SLBs effectively make policy through their day-to-day decisions; managing them requires different tools (motivation, discretion management) than managing top-level administrators.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Public management is described as a multi-disciplinary and multi-level field. Discuss what this means in practice and why studying public management is relevant given the economic and societal role of the public sector.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Multi-disciplinary: public management draws on political science, sociology, economics, and organizational theory — no single discipline captures all of it. Multi-level: analysis spans micro (individual SLBs, discretion), meso (organizational management, performance), and macro (governance systems, reform paradigms). Relevance: the public sector is economically very large (major employer, major GDP share) and its performance directly shapes quality of life — health systems, education, social safety nets. Poor public management has real consequences. The positive relationship between management quality and public sector performance provides a direct empirical justification for the field.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 2 -->
+<div class="section" id="l2">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 02</div>
+    <h2>Public Service Performance</h2>
+    <p class="subtitle">Unravelling what performance means, how to measure it, and its organizational consequences.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">IOO Model</span>
+      <span class="meta-pill">Objective vs. Subjective</span>
+      <span class="meta-pill">Oliver 1991</span>
+      <span class="meta-pill">Bohte &amp; Meier 2000</span>
+      <span class="meta-pill">Matthys et al. 2024</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">What</div><div class="node-text">Multidimensional umbrella concept: equity, efficiency, effectiveness — at multiple organizational levels</div></div>
+      <div class="mind-node"><div class="node-label">How</div><div class="node-text">Objective vs. subjective · Single vs. multi-item · Both technical AND political choices</div></div>
+      <div class="mind-node"><div class="node-label">Why</div><div class="node-text">Measure to prove (legitimacy) vs. measure to improve (learning) — drives different responses</div></div>
+      <div class="mind-node"><div class="node-label">Discretion</div><div class="node-text">Standardization ↔ discretionary space · SSM case: adoption ≠ implementation</div></div>
+      <div class="mind-node"><div class="node-label">Dark Side</div><div class="node-text">Goal displacement · Cherry-picking · Organizational cheating (Bohte &amp; Meier) · Oliver's response strategies</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The IOO Model — Conceptualizing Performance</h3>
+    <p>Public sector performance is organized as an <strong style="color:var(--text)">input–output–outcome</strong> chain. Inputs are resources fed in; outputs are directly measurable deliverables; outcomes are the broader societal effects. Performance is simultaneously multidimensional and multi-level.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Multidimensional:</strong> equity, efficiency, effectiveness — and more. Example from a leisure centre: acknowledging ethnic discrimination in sports (equity dimension) vs. introducing positive discrimination in team selection (program level) vs. a zero-tolerance culture against discrimination in every aspect of organizational life (organizational level).</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Multi-level:</strong> organizational level (e.g., cost efficiency of the whole organization) vs. program level (e.g., inclusion within a specific service). These levels can produce contradictory findings.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Take-away #1</div>
+      <div class="callout-text">Public sector performance is an umbrella concept with multiple dimensions at different levels. There is no single "right" definition — what counts as performance is itself a political and strategic choice.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>How to Measure? Technical Choices</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Objective Measurement</h4>
+        <ul>
+          <li>Absence of social desirability bias (SDB) — the "golden standard"</li>
+          <li>Allows benchmarking across time and peer organizations</li>
+          <li>Often financial indicators; no third-party quality control</li>
+          <li>Risk: "not everything that counts can be counted"</li>
+          <li>Assumptions and political choices embedded in what is (not) included</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Subjective Measurement</h4>
+        <ul>
+          <li>Allows cross-sector / cross-country comparison</li>
+          <li>Includes small organizations absent from secondary data</li>
+          <li>Convenient; perceptions matter in themselves</li>
+          <li>Risk: SDB and other cognitive biases</li>
+          <li>Mixed reliability when compared to objective measures</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:13.5px;color:var(--text2)">Additional design choices: single-item vs. multi-item scales. Multi-item scales reduce measurement error and capture more nuance but are more burdensome to collect. The evolution in nonprofit management research shows a clear trend toward multi-item, multi-source approaches.</p>
+    <div class="callout">
+      <div class="callout-label">Take-away #2 — From Technical to Political</div>
+      <div class="callout-text">What and how is measured is ultimately a function of individual belief systems — scientific, ideological, political. Example: a $2 trillion government spending figure can be framed as proof of wasteful bureaucracy (DOGE logic) or as essential service provision. Prof. Don Moynihan (Ford School) shows the "basic math" assumptions behind efficiency arguments often don't hold up empirically.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Why Measure? Two Rationales</h3>
+    <div class="compare-grid">
+      <div class="compare-col pro">
+        <h4>Measure to Prove (Legitimacy)</h4>
+        <ul>
+          <li>Public accountability to external funders/government</li>
+          <li>Indicators typically defined externally</li>
+          <li>Tied to public funding — "looking backward"</li>
+          <li>Risk: "best image" mentality → necessary evil</li>
+          <li>Triggers: Oliver's (1991) strategic response strategies</li>
+        </ul>
+      </div>
+      <div class="compare-col con">
+        <h4>Measure to Improve (Learning)</h4>
+        <ul>
+          <li>Internal organizational learning focus</li>
+          <li>Indicators defined internally — "looking forward"</li>
+          <li>Positive image: evaluation as inherent good management</li>
+          <li>"Vulnerable attitude" — accepting imperfection</li>
+          <li>Enables genuine discretion and improvement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Organizational Response Strategies (Oliver, 1991)</h3>
+    <p>PSOs hold a multitude of strategic responses to external accountability pressures. The more the orientation is "measure to prove," the more creative — and sometimes deviant — these responses become.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Acquiescence:</strong> Full compliance with external requirements. Passive acceptance of indicators and standards.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Compromise:</strong> Partial compliance; balance competing internal and external demands. Negotiate indicator definitions.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Avoidance:</strong> Reduce the need to comply — buffer the organization from external scrutiny, conceal non-compliance.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Defiance:</strong> Active resistance, dismissal of norms or outright challenge of external pressures.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Manipulation:</strong> Attempt to actively change or control the content of external expectations themselves.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Key tension</div>
+      <div class="callout-text">How can accountability work purposefully — allowing sensible control AND organizational learning simultaneously? Purely rational management tool use may forget about organizational fit and the human factor.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Standardization vs. Discretion — The SSM Case (Matthys et al., 2024)</h3>
+    <p>The self-sufficiency matrix (SSM) is a tool imposed by local government on social service PSOs (N=22). Intake and re-scoring every 3 months. Purpose: equality and intervention effectiveness.</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Social Worker's Critique</h4>
+        <ul>
+          <li>"Very artificial — I couldn't care less about it"</li>
+          <li>Good days/bad days: rosy light bias</li>
+          <li>Neglects client's own perspective (dirty house ≠ low quality of life if client is fine with it)</li>
+          <li>Not all life domains equally scorable (finance vs. mental health)</li>
+          <li>Inadequate for complex cases — oversimplifies reality</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Organizational Problems</h4>
+        <ul>
+          <li>Specialist PSOs don't cover all SSM domains (e.g., finance or housing may be out of scope)</li>
+          <li>High caseload → shortcuts to meet admin deadlines (copy &amp; paste)</li>
+          <li>Ask colleagues → different scoring norms across organizations</li>
+          <li>Adoption (capacity/translation) ≠ Implementation (actual use)</li>
+          <li>Discretionary space: social workers navigate rather than comply</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Dark Side — Organizational Cheating (Bohte &amp; Meier, 2000)</h3>
+    <p>When performance is notoriously difficult to measure, it becomes prone to <strong style="color:var(--text)">goal displacement</strong>. Case: Texas school districts under standardized TAAS testing. The theoretical logic: positive performance gap → pressure on administrators and students → non-legitimate exemptions from exams.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Cutting corners:</strong> "Beating the test" rather than the actual goal — preparing responsible citizens and enhancing economic self-sufficiency. Classic case of measuring the proxy instead of the thing itself.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lying:</strong> Depicting more favorable results, or telling a selective truth to external audiences — emphasizing metrics that look good, burying those that don't.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Sampling bias (cherry-picking):</strong> Granting exam exemptions to low-income/minority students predicted to score poorly — inflating scores without improving underlying performance. The Bohte &amp; Meier model shows administrator-to-student ratios and funding per student predict non-legitimate TAAS absences.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Take-away #3</div>
+      <div class="callout-text">Managing public sector performance is a situated practice and can have a "dark side." The more external accountability pressure, the more creative organizational responses — including deviant ones. This makes the design of accountability systems itself a critical managerial and political act.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Bohte &amp; Meier (2000)</span>
+      <span class="author-chip">Matthys et al. (2024)</span>
+      <span class="author-chip">Oliver (1991)</span>
+      <span class="author-chip">Don Moynihan</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the IOO model of public sector performance. Why is performance considered "multidimensional" and why does this create challenges for public managers?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">The IOO model (Input–Output–Outcome) traces how resources fed into an organization (inputs) are transformed into deliverables (outputs) that produce broader societal effects (outcomes). Performance is multidimensional because it encompasses equity, efficiency, effectiveness, and more — each measured at different levels (organizational vs. program). This creates challenges because: different stakeholders prioritize different dimensions; measuring multiple dimensions simultaneously requires trade-offs; and what counts as "good" performance is inherently political, not purely technical.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">What is the difference between measuring to prove and measuring to improve? What organizational response strategies are associated with each rationale?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Measuring to prove (legitimacy): indicators are externally defined, tied to funding, and primarily serve public accountability — the organization looks backward and tries to present the best possible image. Measuring to improve (learning): indicators are internally defined, forward-looking, and used to drive better management decisions — a "vulnerable attitude" that accepts imperfection. Response strategies for "prove": gaming, cherry-picking, emphasizing favorable metrics. For "improve": genuine data use, discretionary adaptation (e.g., the self-sufficiency matrix).</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Using the case of standardized testing in Texas (Bohte &amp; Meier, 2000) and the self-sufficiency matrix (Matthys et al., 2024), discuss the conditions under which performance measurement leads to goal displacement. What are the managerial implications?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Goal displacement occurs when organizations optimize measured targets at the expense of the underlying mission. In Texas, school districts "beat the test" through cutting corners, lying, and sampling bias (excluding low performers). In the SSM case, social workers found the matrix too artificial, leading to shortcuts (copy-paste, ignoring client complexity). Conditions that enable displacement: performance is difficult to measure inherently; indicators are externally imposed with high stakes; discretion is constrained; organizational culture tolerates or incentivizes gaming. Managerial implications: involve frontline workers in indicator design; use multiple measures; audit for gaming behavior; build a culture of genuine improvement over image management.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 3 -->
+<div class="section" id="l3">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 03</div>
+    <h2>Public Management Reforms</h2>
+    <p class="subtitle">OPA, NPM, and NPG as normative prescriptions — lenses to study and templates to do public management.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Weber</span>
+      <span class="meta-pill">Old Public Administration</span>
+      <span class="meta-pill">New Public Management</span>
+      <span class="meta-pill">New Public Governance</span>
+      <span class="meta-pill">Pollitt &amp; Bouckaert</span>
+      <span class="meta-pill">Osborne 2006</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map — Three Reform Paradigms</h3>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>OPA · Age of Bureaucracy</h4>
+        <ul>
+          <li>Gemeinschaft → Gesellschaft transition</li>
+          <li>Rational/legal leadership (Weber)</li>
+          <li>Hierarchy, rules, neutral officials</li>
+          <li>Government should row</li>
+          <li>Citizens = voters · Theta values</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>NPM · Age of the Market</h4>
+        <ul>
+          <li>More management, measurement, market</li>
+          <li>Let managers manage · Competition</li>
+          <li>Government steers, not rows</li>
+          <li>Citizens = consumers · Sigma values</li>
+          <li>Hollow state → more rule layers</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>NPG · Age of Networks</h4>
+        <ul>
+          <li>From government to governance</li>
+          <li>Co-production and wicked issues</li>
+          <li>Government = convener, catalyst, collaborator</li>
+          <li>Citizens = co-producers · Landa values</li>
+          <li>Public manager as boundary spanner</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>What Are Public Management Reforms?</h3>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <div class="def-text">Public management reforms are normative prescriptions that offer direction on what is expected from public managers — which performance dimensions to prioritize and which values to prioritize. They are both lenses to study public management and templates to do it.</div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Key methodological point</div>
+      <div class="callout-text">These are "big concepts with different manifestations and intensities — and thus different effects." Context matters. The interaction between paradigms matters too: it is not a linear evolution but a layered reality. Real-world systems combine elements of all three.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>OPA — The Age of Bureaucracy (Weber)</h3>
+    <p>Weber's sociology traces the shift from small-N traditional communities (Gemeinschaft, charismatic/traditional leadership) to large-N modern societies (Gesellschaft, rational/legal leadership). The bureaucratic organization is the institutional response to this modernization.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Hierarchical organization:</strong> Top management decides, line managers execute. Top-down control and discipline throughout.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Clear lines of authority + rule-driven:</strong> Standardization of public service delivery to guarantee equality, efficiency, and predictability. Equal treatment is both the goal and the method.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Expert bureaucrats:</strong> Formal education, well-defined functions. Knowledge as the basis of authority.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Neutral officials:</strong> Neutrality toward (1) service users and (2) politicians — the classic decision/execution divide.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Merit-based advancement:</strong> Years of experience and performance level; permanent positions protect from arbitrary dismissal.</div></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--text2);margin-top:10px">Public management from this perspective: government needs to "row" — designing and implementing policy. Citizens = voters. Core values: <strong style="color:var(--text)">theta values</strong> — keep it honest and fair.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>Criticisms of OPA</h3>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Interpersonal Level</h4>
+        <ul>
+          <li>Excessive rule compliance — losing sight of the spirit</li>
+          <li>Street-level discretion emerges despite rules (SSM case)</li>
+          <li>Clear authority + rule-driven ≠ actual behavior</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Organizational Level</h4>
+        <ul>
+          <li>Orgs advance their own goals (growth) over public value</li>
+          <li>J. Edgar Hoover: 48 years directing FBI under 8 presidents</li>
+          <li>Used FBI to harass dissidents, amass personal power — "neutral official" as fiction</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Societal Level</h4>
+        <ul>
+          <li>Administrative burden — rules designed for non-take-up</li>
+          <li>US abortion policy: 1/3 of restrictions create burden by design (Herd &amp; Moynihan)</li>
+          <li>Learning, compliance &amp; psychological costs → equality undermined</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>NPM — The Age of the Market</h3>
+    <p>NPM frames Weberian bureaucracy as a failed model: government too big, too unsustainable, too bureaucratic. Prescription: <strong style="color:var(--text)">more management, measurement and market</strong> — government should work like a business.</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>NPM Building Blocks</h4>
+        <ul>
+          <li>Let managers manage — room for operational decisions</li>
+          <li>Business tools: strategic planning, lean management</li>
+          <li>Do more with less — economy, efficiency, effectiveness (3Es)</li>
+          <li>Cut large orgs into smaller single-objective units (~manageability)</li>
+          <li>Competition + contracting + control = quality mechanism</li>
+          <li>Government steers, not rows · Citizens = consumers · Sigma values</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Pollitt &amp; Bouckaert: Cross-Country Variation</h4>
+        <ul>
+          <li>Anglo-Saxon world furthest ahead (UK, NZ, Australia)</li>
+          <li>Belgium in the middle of the pack</li>
+          <li>Spectrum: Maintain → Modernize → Marketize → Minimize</li>
+          <li>Different intensities produce different outcomes</li>
+          <li>Context matters — no one-size-fits-all NPM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>NPM in Practice — Inside and Outside Public Organizations</h3>
+    <p>NPM is everywhere inside public organizations (UK £2.5bn consulting market in 2021; $25bn globally in 2023) — healthcare, environmental affairs, crisis management, defence, IT, policy development.</p>
+    <div class="compare-grid">
+      <div class="compare-col pro">
+        <h4>Consultants — Arguments For</h4>
+        <ul>
+          <li>Substantive experts delivering fast results</li>
+          <li>Infuse expert knowledge into slow bureaucracies</li>
+          <li>Offer innovative approaches to difficult issues (civic participation, municipal amalgamations)</li>
+          <li>Stamp of approval — legitimizing public policy</li>
+        </ul>
+      </div>
+      <div class="compare-col con">
+        <h4>Consultants — Arguments Against</h4>
+        <ul>
+          <li>Cookie-cutter solutions to context-sensitive issues</li>
+          <li>Political illiteracy — miss public sector complexity</li>
+          <li>Leave with information; don't share, use for future assignments elsewhere</li>
+          <li>Crowding out civil servants (permanence of "temporary" services)</li>
+          <li>Politicians: blame avoidance by shifting responsibility</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">The Hollow State — Privatization paradox</div>
+      <div class="callout-text">NPM created the "hollow state": national government leaks responsibilities up (to supra-national bodies), out (to civil society and companies), and down (to local governments). Privatization = short-term gain (deflected responsibility, public income) vs. long-term costs for citizens and poor quality. The promise of "outsourcing" public services to competition has frequently broken down — Britain was a pioneer in outsourcing; now, "the model is broken."</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>NPG — The Age of Networks</h3>
+    <p>NPG starts from the observation that government is fragmented — many public organizations, levels, and actors. From government to governance: other societal actors have a responsibility to steer society. Focus on <strong style="color:var(--text)">wicked issues</strong> (e.g., Covid-19, global warming, poverty, inequality).</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Government's role:</strong> Convener, catalyst, collaborator — sometimes steering, sometimes rowing, sometimes partnering, sometimes staying out of the way. Very different from OPA (always rows) and NPM (always steers).</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Citizens = co-producers:</strong> Active involvement in policy formulation (e.g., input in mobility plans) and policy implementation (e.g., co-opening a community swimming place). Core values: <strong style="color:var(--text)">Landa values</strong> — keep it robust and resilient.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>The public manager as boundary spanner:</strong> Given increased interdependencies between state and non-state actors, collaboration across different service fields (e.g., poverty), and civic participation — public managers must engage in coordination and collaboration across organizational and service field boundaries to deliver more integrated services.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">A layered reality — the PISA case</div>
+      <div class="callout-text">The PISA (education assessment) case illustrates how real systems combine all three paradigms: hierarchical standardized testing (OPA), competition and performance league tables (NPM), and international collaboration and network-based policy learning (NPG). No single paradigm dominates — they coexist and interact. This is why context-sensitive "middle-range theory" is more useful than "grand theory" for practitioners.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Weber</span>
+      <span class="author-chip">Pollitt &amp; Bouckaert</span>
+      <span class="author-chip">Osborne (2006)</span>
+      <span class="author-chip">Herd &amp; Moynihan (2018)</span>
+      <span class="author-chip">George et al. (2020)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">List and explain the five building blocks of Weberian bureaucracy (OPA). For each, identify one criticism raised in the lecture.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">1. <strong>Hierarchical organization</strong> — top-down control; criticism: creates rigidity and slow adaptation. 2. <strong>Clear lines of authority</strong> — standardized delivery; criticism: equality of process ≠ equity of outcome. 3. <strong>Expert bureaucrats</strong> — merit and specialization; criticism: expertise becomes siloed, limits cross-cutting coordination. 4. <strong>Neutral officials</strong> — separates politics from administration; criticism: J. Edgar Hoover shows "neutrality" can mask power accumulation. 5. <strong>Merit-based advancement</strong> — permanent positions protect from political retaliation; criticism: can entrench bad performers and reduce accountability.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">How does NPM view the role of government and the citizen differently from OPA? What core values underpin each paradigm?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">OPA: government should "row" — design and directly implement policy. Citizens are voters providing a democratic mandate. Core values: theta values (honesty, fairness, equality through standardization). NPM: government should "steer, not row" — decide which services are core tasks and outsource the rest. Citizens are consumers with individual choices. Core values: sigma values (economy, efficiency, effectiveness). The key shift is from rule-following equality to market-based efficiency, and from citizens as collective mandate-givers to individual customers.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Compare and contrast OPA, NPM, and NPG as approaches to public management reform. For each paradigm, discuss: (1) the core value orientation, (2) the role of the citizen, and (3) one key empirical criticism or limitation.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">OPA — values: theta (fairness, equality); citizen as voter; criticism: administrative burden, rigidity, risk of bureaucratic capture (Hoover). NPM — values: sigma (economy, efficiency, effectiveness); citizen as consumer; criticism: fragmentation through agencies, hollow state, more rules despite claiming to cut bureaucracy, information asymmetry undermines real consumer choice. NPG — values: phi (openness, participation, trust); citizen as co-producer; criticism: governance networks can lack accountability, co-production risk of government abdicating responsibility, impact depends heavily on administrative tradition (Voorberg et al.). Each paradigm emerged as a critique of the previous — but none fully replaces the others; real systems are mixes (Pollitt &amp; Bouckaert).</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 4 -->
+<div class="section" id="l4">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 04 — Guest Lecture</div>
+    <h2>Public Value(s)</h2>
+    <p class="subtitle">Dr. ir. Rowie Huijbregts · Understanding public values, value assessment, and value conflicts in practice.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Bozeman 2007</span>
+      <span class="meta-pill">Moore 1995</span>
+      <span class="meta-pill">Huijbregts et al. 2021</span>
+      <span class="meta-pill">Beaton et al. 2021</span>
+      <span class="meta-pill">Easton 1965</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Society</div><div class="node-text">Trends (climate, aging, inequality) + Transitions (energy, digital, circular) → demands on government, market, civil society</div></div>
+      <div class="mind-node"><div class="node-label">Two Definitions</div><div class="node-text">Bozeman: normative consensus about principles for government · Moore: all benefits government delivers to society</div></div>
+      <div class="mind-node"><div class="node-label">Strategic Triangle</div><div class="node-text">Moore's three corners: Public value proposition · Legitimacy (authorizing environment) · Operational capacity</div></div>
+      <div class="mind-node"><div class="node-label">Complexity</div><div class="node-text">Values conflict · Bounded rationality · Value creation ↔ destruction simultaneously</div></div>
+      <div class="mind-node"><div class="node-label">Key Quote</div><div class="node-text">"A fuzzy idea rather than a stable umbrella concept" (Cui &amp; Osborne, 2021)</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Why Public Values? — Societal Context</h3>
+    <p>Public values are not static — they shift as society changes. Six key societal trends currently pressure the public sector: climate change and adaptation, urbanization, growing aging population and rising healthcare costs, resource scarcity, (inter)national security pressures, and increasing poverty and inequality.</p>
+    <div class="callout">
+      <div class="callout-label">The Democratic Triangle</div>
+      <div class="callout-text">No single entity — government, market, or civil society — possesses all the necessary resources and insights on its own. Collaboration and co-creation within the democratic triangle are essential. This is why public value management is inherently relational and context-dependent.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Understanding Public Value(s) — Three Academic Lenses</h3>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Political Science</h4>
+        <ul>
+          <li>Politics = authoritative allocation of values (Easton, 1965)</li>
+          <li>Values solidified into binding policy</li>
+          <li>Four core policy questions (Hemerijck): Does it work? Does it fit? Is it allowed? Is it appropriate?</li>
+          <li>Division of political portfolios shows value priorities</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Public Administration</h4>
+        <ul>
+          <li>TPA: government as legal authority — constitutional legality</li>
+          <li>NPM: government as service provider — instrumental efficiency</li>
+          <li>Post-NPM: government as arena for value creation — all four questions, especially feasibility and acceptability</li>
+          <li>Shift from hierarchy → market → network</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Public Management</h4>
+        <ul>
+          <li>Moore (1995): managers create value through strategic activities</li>
+          <li>Strategy is not something an org "has" but actively "does"</li>
+          <li>Strategy-as-Practice: actors, institutions, activities</li>
+          <li>Internal and external stakeholder management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Two Competing Definitions</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Values Assessment Perspective (Bozeman, 2007)</h4>
+        <ul>
+          <li>Public values = normative consensus about the principles on which governments and policies should be based</li>
+          <li>Focus: which values qualify as "public"? Value pluralism, value conflicts, value trade-offs</li>
+          <li>Values are "solidified" into normative consensus through political processes</li>
+          <li>Problem: consensus is contested and evolving</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Value Creation Perspective (Moore, 1995)</h4>
+        <ul>
+          <li>Public value = all benefits that government activity delivers for society</li>
+          <li>Focus: strategic activities of public managers to create value</li>
+          <li>Public value proposition depends on context — not universal</li>
+          <li>Operationalized through Moore's Strategic Triangle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Moore's Strategic Triangle (1995)</h3>
+    <p>To create public value, a public manager must simultaneously align three elements — neglecting any one of them undermines the others.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Public value proposition:</strong> What value is the organization trying to create? What problem is it solving for whom? This must be articulated clearly and updated as societal needs change.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Legitimacy (Authorizing environment):</strong> Policymakers, resource holders, oversight bodies — those with coercive power who authorize the mission and provide resources. Public managers must maintain political and social legitimacy.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Operational capacity:</strong> The organization's ability to actually deliver on its value proposition — staff, systems, processes, capabilities. Without this, even well-authorized missions fail in practice.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Why this connects to political astuteness (L08)</div>
+      <div class="callout-text">The strategic triangle explains why public managers need political astuteness: aligning the authorizing environment requires actively managing relationships with politicians and stakeholders, not just technically delivering services. This is a recurrent theme throughout the course.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Distinction: Values vs. Value</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Public Values (plural)</h4>
+        <ul>
+          <li>What society expects from the public sector</li>
+          <li>Normative consensus — collective but individually interpreted</li>
+          <li>"In the eye of the beholder"</li>
+          <li>Difficult to translate into organizational action</li>
+          <li>Examples: equity, accountability, efficiency, sustainability, democracy</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Public Value (singular)</h4>
+        <ul>
+          <li>The extent to which public values are actually met</li>
+          <li>The end goal of the public manager</li>
+          <li>Created in a task environment (sector-specific)</li>
+          <li>Requires aligning Moore's three corners</li>
+          <li>Can be created and destroyed simultaneously</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Value Conflicts in Hybrid Organizations (Beaton et al., 2021)</h3>
+    <p>The Promenade Conservancy case illustrates how value conflicts emerge when organizations pursue multiple public values simultaneously. The director (MBA graduate) introduced food trucks to make the promenade "vibrant" and financially stable.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Vibrancy vs. Aesthetics/Security/Morale:</strong> Food trucks created vibrancy but ruined the iconic view (trucks parked in front), created safety issues (vehicles in a pedestrian zone), produced exhaust and trash, and demoralised park rangers who felt ignored.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Commons vs. Stability:</strong> Nonprofits set up awareness booths (distracting food truck clients); free cupcake samples displaced truck business; homeless people sleeping on benches discouraged diners.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Key insight:</strong> Public management may be imperfect by design. Bounded rationality means managers focus on the most salient values and may unintentionally destroy less visible ones. Creation and destruction happen simultaneously.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Managing Public Values in Practice</h3>
+    <div class="callout">
+      <div class="callout-label">Central Argument</div>
+      <div class="callout-text">Managing public values is a <em>situated practice</em>. Public managers must distil normative consensus from stakeholders and translate it into organizational action — navigating value prioritization, conflicts, and the risk of value destruction. The real estate case (Huijbregts et al.) illustrates this: decisions about public buildings require balancing financial sustainability, cultural heritage, accessibility, environmental standards, and democratic accountability simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Moore (1995)</span>
+      <span class="author-chip">Bozeman (2007)</span>
+      <span class="author-chip">Easton (1965)</span>
+      <span class="author-chip">Beaton et al. (2021)</span>
+      <span class="author-chip">Huijbregts et al. (2021)</span>
+      <span class="author-chip">Cui &amp; Osborne (2021)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the distinction between "public values" and "public value." Why is this distinction important for public managers?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Public values (plural) = the normative standards society expects public organizations to uphold — equity, accountability, sustainability, efficiency, etc. They are collective but also individually interpreted ("in the eye of the beholder"). Public value (singular) = the extent to which those values are actually met — the end goal of the public manager, tied to Moore's strategic triangle (authorizing environment, task environment, operational capabilities). The distinction matters because managers must first understand what values are expected (plural) before they can pursue the outcome (singular) — and navigating conflicts between competing values is itself the central managerial challenge.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Using the Promenade Conservancy case (Beaton et al., 2021), explain how public value creation and public value destruction can occur simultaneously in a hybrid organization.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">The Promenade Conservancy director pursued vibrancy and financial stability through food trucks — creating value on those dimensions. But simultaneously, food trucks destroyed value on other dimensions: aesthetics (blocking the iconic view), security (trucks in a pedestrian zone), environmental quality (exhaust, trash), and staff morale (rangers felt ignored). Because the organization managed multiple public values at once (a hybrid), optimizing one value necessarily created tensions with others. This illustrates that public management may be imperfect by design — bounded rationality means managers focus on the most salient values and may unintentionally destroy less visible ones.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Critically assess the concept of public value. Why has it been called "a fuzzy idea rather than a stable umbrella concept" (Cui &amp; Osborne, 2021)? What are the practical implications of value conflicts for public managers?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">"Fuzzy" because: public value has been defined inconsistently across the literature; it conflates process (how decisions are made) with outcome (what is achieved); and it is difficult to operationalize — distilling normative consensus from diverse stakeholders is a deeply political act. Practical implications of value conflicts: managers must engage in situated value prioritization — there is no universal ranking of values, so context and stakeholder input determine what takes precedence. Conflicts cannot be fully resolved, only navigated. Managers need frameworks for surfacing hidden trade-offs, involving affected parties, and making transparent choices. The risk of inaction is value destruction by default.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 5 -->
+<div class="section" id="l5">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 05</div>
+    <h2>Organizational Scale</h2>
+    <p class="subtitle">Is bigger better? The economics and politics of size, mergers, and networks in public organizations.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Economies of Scale</span>
+      <span class="meta-pill">Mergers</span>
+      <span class="meta-pill">Networks</span>
+      <span class="meta-pill">Walker et al. 2023</span>
+      <span class="meta-pill">Vanhoutte 2023</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Key Finding</div><div class="node-text">No linear relationship between size and performance — size is something to manage for, not a solution in itself</div></div>
+      <div class="mind-node"><div class="node-label">Big is Better</div><div class="node-text">Economies of scale · Broader services · HR advantages · Bargaining power</div></div>
+      <div class="mind-node"><div class="node-label">Small is Beautiful</div><div class="node-text">Tailored services · Closer to recipients · Responsiveness · Lower coordination costs</div></div>
+      <div class="mind-node"><div class="node-label">Mergers</div><div class="node-text">Trend in public management · Nonprofit-public · Municipal — integration ≠ merger</div></div>
+      <div class="mind-node"><div class="node-label">Networks</div><div class="node-text">Wicked issues require multi-actor governance · Administrative capacity at local level</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Big vs. Small — The Evidence (Walker et al., 2023)</h3>
+    <div class="compare-grid">
+      <div class="compare-col pro">
+        <h4>Big is Better (Economic Perspective)</h4>
+        <ul>
+          <li>Economies of scale → reduced overhead and supply costs</li>
+          <li>Improved bargaining position with suppliers</li>
+          <li>Broader range of integrated activities (something for everyone)</li>
+          <li>Better HR: competitive advantage to recruit and retain staff</li>
+        </ul>
+      </div>
+      <div class="compare-col con">
+        <h4>Small is Beautiful (Political Perspective)</h4>
+        <ul>
+          <li>Standardized services — lack tailored approach</li>
+          <li>Less connection with service recipients → reduced responsiveness</li>
+          <li>High coordination costs</li>
+          <li>Distant from frontline needs and local knowledge</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Verdict</div>
+      <div class="callout-text">No evidence supports either the "big is better" or "small is beautiful" camp unconditionally. The relationship may be curvilinear ("too much of a good thing"). Size is something to manage for — not a deterministic variable.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Merger Case: Nonprofit-Public Elderly Care (Vanhoutte, 2023)</h3>
+    <p>A 2014 merger between a public and nonprofit elderly care centre illustrates the organizational and human complexity of mergers in practice.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>A merger does not mean integration.</strong> Staff remained segregated (symbolized by chairs moved apart at the first joint New Year's reception). Shared physical space ≠ shared organizational culture.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Organizational benefits:</strong> Leadership stability, financial stability, stronger position with banks for building loans, improved connections with local government.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Individual costs:</strong> Stress from job security concerns, different salaries for the same work (phasing out), different procedures and routines disrupting established practices.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Self-Determination Theory and Change Acceptance</h3>
+    <p>Research on a nonprofit serving vulnerable children (N=129) found that models explained over 60% of variation in support for organizational change.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Relatedness (meaningful participation):</strong> Staff need to feel meaningfully involved — not just consulted.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Autonomy:</strong> Asking upward and sideways, not top-down imposition. "Not only giving voice, but also feeling heard."</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Competence:</strong> Is the change purposeful for me? Staff need to understand how the change is relevant to their own work.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Municipal Mergers and Administrative Capacity</h3>
+    <p>Beyond nonprofit-public mergers, municipal mergers are a key trend in Belgian and European public management. Growing importance of strong local administrations because of the "leaking down" (hollow state) of responsibilities — childcare, spatial planning, libraries, youth work, policing.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Administrative capacity signals:</strong> One-person services (spatial planning, IT, mobility, sustainability) and no-person services (e.g., no administrative support for representation in intercommunal networks) indicate local governments at breaking point.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Why it matters:</strong> In-house expertise is critical to decrease dependence on external actors — consultants, real estate developers — who may not serve public interests. The "hollow state" requires local governments to either merge or build networks to compensate for individual capacity gaps.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Networks as alternative to mergers:</strong> Wicked issues (cross-cutting, intractable problems) require multi-actor governance networks. Networks allow coordination without structural merger — but introduce their own challenges of accountability, coordination costs, and rule accumulation (→ red tape, L06).</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Walker et al. (2023)</span>
+      <span class="author-chip">Vanhoutte (2023)</span>
+      <span class="author-chip">Self-determination theory (Deci &amp; Ryan)</span>
+      <span class="author-chip">Osborne (NPG)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">What does the meta-analysis by Walker et al. (2023) conclude about the relationship between organizational size and public service performance? Why is this result important for management practice?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Walker et al. find no linear relationship — neither "big is better" nor "small is beautiful" holds unconditionally. The relationship may be curvilinear ("too much of a good thing"). This is important because it reframes the question: rather than asking "should we be bigger or smaller?", managers should ask "how do we manage for size?" Mergers and splits are not inherently good or bad — their outcomes depend on how they are managed. The economic arguments for scale (efficiency, bargaining power) and the political arguments for smallness (responsiveness, tailoring) can both be valid simultaneously, requiring managers to actively navigate the trade-offs.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Using the elderly care merger case (Vanhoutte, 2023) and self-determination theory, explain why public sector mergers often fail to achieve integration. What do managers need to consider beyond the organizational and financial rationale?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">The elderly care case shows that a merger on paper (legal, financial, structural) does not produce integration in practice — staff literally moved their chairs apart at the first joint event. Mergers fail at the human level because they ignore self-determination theory needs: Relatedness (staff need meaningful participation, not just notification), Autonomy (bottom-up involvement, feeling heard, not just giving voice), and Competence (the change must feel personally relevant and purposeful). Beyond financial logic, managers need to: communicate why the change matters to individuals; involve staff in how it is implemented; create structures for genuine voice (all-staff meetings, workgroups); and recognize that different organizational cultures don't merge automatically — they need active bridging over time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 6 -->
+<div class="section" id="l6">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 06</div>
+    <h2>Red Tape</h2>
+    <p class="subtitle">Defining, originating, and combating the rules that burden without benefit.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Bozeman 2000</span>
+      <span class="meta-pill">George et al. 2020</span>
+      <span class="meta-pill">Meta-analysis</span>
+      <span class="meta-pill">Digitalization</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Definition</div><div class="node-text">Rules with high compliance burden + low functionality (Bozeman, 2000) · "One person's red tape is another's treasured safeguard"</div></div>
+      <div class="mind-node"><div class="node-label">Types</div><div class="node-text">Internal (born bad / gone bad) vs. External (government to third parties) — different drivers, different leverage</div></div>
+      <div class="mind-node"><div class="node-label">Origins</div><div class="node-text">OPA (equality through standardization) · NPM (more accountability = more rules) · NPG (networks add rule layers)</div></div>
+      <div class="mind-node"><div class="node-label">Effects</div><div class="node-text">Negative impact on both organizational performance and employee outcomes (George et al., 2021) — small-to-medium effect</div></div>
+      <div class="mind-node"><div class="node-label">Reduction</div><div class="node-text">Digitalization · Red tape reduction programs · Simplify, support, reach out</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Defining Red Tape (Bozeman, 2000)</h3>
+    <div class="def-box">
+      <div class="def-label">Foundational Definition</div>
+      <div class="def-text">Rules, regulations and procedures that remain in force and entail a compliance burden but do not advance the legitimate purposes the rules were intended to serve.</div>
+    </div>
+    <p>Red tape requires rules to score high on two characteristics simultaneously:</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Compliance burden:</strong> Effort and time required for designated stakeholders to comply with the rule.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lack of functionality:</strong> The extent to which the rule fails to serve the purpose it was intended to regulate.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Key insight:</strong> "One person's red tape is another's treasured safeguard." Assessing red tape is inherently subjective — it involves judging whether the trouble of complying outweighs the perceived benefits.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Internal vs. External Red Tape</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Internal Red Tape</h4>
+        <ul>
+          <li>Rules born bad: wrong starting assumptions</li>
+          <li>Rules gone bad: wrong implementation or unresponsive over time</li>
+          <li>Directly influenced by organizational leadership</li>
+          <li>Can be changed more readily by managers</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>External Red Tape</h4>
+        <ul>
+          <li>Government to third parties — regulations &amp; accountability</li>
+          <li>High when many different stakeholders involved</li>
+          <li>High when discretion is low</li>
+          <li>Harder to change (~requires lobbying)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Origins of Red Tape</h3>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>OPA:</strong> All citizens should be treated equally — many standardized rules implemented, creating a compliance baseline.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>NPM (1980s):</strong> Increased focus on performance management, external accountability, and contracting → more rules imposed by government. Hollow state → more governmental layers → more rule-making.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>NPG (2000s):</strong> From government to governance → networks and co-production → additional rule layers from multiple actors.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Effects Meta-Analysis (George et al., 2021)</h3>
+    <div class="callout">
+      <div class="callout-label">Key Finding</div>
+      <div class="callout-text">Red tape has a significant, negative, and small-to-medium impact on both organizational performance (E&amp;E) and employee outcomes (job satisfaction, motivation). NOT as apocalyptic as often assumed — but continuous attention is required because it tends to re-accumulate.</div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Main Effect Mechanisms</h4>
+        <ul>
+          <li>Hampers recruitment, retention &amp; motivation of qualified personnel</li>
+          <li>Hard to obtain useful performance information in a timely manner</li>
+          <li>Lack of discretion hurts motivation → lower job satisfaction and stress</li>
+          <li>Effect is real but small-to-medium — not catastrophic</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Context &amp; Method Moderators</h4>
+        <ul>
+          <li>Internal red tape is more harmful than external (within direct manager control)</li>
+          <li>Limited variation across sectors and administrative traditions — careful to generalize</li>
+          <li>No CMB bias: multi-source data is more reliable</li>
+          <li>Other contextual variables: organizational size, task, age, time period</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>In Search of Silver Bullets — Digitalization</h3>
+    <div class="compare-grid">
+      <div class="compare-col pro">
+        <h4>Arguments For Digitalization</h4>
+        <ul>
+          <li>Centralization of information → decrease in compliance costs</li>
+          <li>Increase in functionality (perceived as more efficient and responsive)</li>
+          <li>Service finders, eligibility calculators, one-stop counters</li>
+          <li>Flemish renovations portal: interactive eligibility display</li>
+        </ul>
+      </div>
+      <div class="compare-col con">
+        <h4>Risks and Limitations</h4>
+        <ul>
+          <li>Existing bureaucratic processes merely replaced by digital alternatives</li>
+          <li>Digital tools can shift red tape (e.g., from central to local level)</li>
+          <li>Convenience of digital tools → more accountability demands → more rules</li>
+          <li>Regulating AI/digital tools through new rules creates new red tape</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Remedies — How to Deal with Red Tape</h3>
+    <p>The "lasagna" metaphor: accumulated rule layers (OPA + NPM + NPG) that are difficult to separate. Reducing red tape requires both diagnosis and deliberate action.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Policymaker's perspective (external):</strong> WHAT — list to find overlap and non-functional aspects, then cut/streamline. HOW — verify compliance processes and streamline them. The process matters: give stakeholders voice and the feeling of being heard.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Public manager's perspective (internal):</strong> (1) Cut by giving voice — involve frontline staff in identifying red tape. (2) Allow discretion to SLBs. (3) Explain and justify rules — even if they can't be removed, transparent rationale reduces perceived burden.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>SLB's perspective:</strong> Be transparent about (1) what is perceived as red tape and why, and (2) how it is navigated in practice. "Death by a thousand 10-minute tasks" — small compliance requirements accumulate into major burden (UGent VPN as a daily example).</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Size and red tape</div>
+      <div class="callout-text">Larger organizations are better equipped to deal with red tape (dedicated compliance staff, legal expertise, economies of scale in processing) — but also more likely to generate internal red tape themselves through formalization. Size is both a buffer and a source.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Bozeman (2000)</span>
+      <span class="author-chip">George et al. (2021)</span>
+      <span class="author-chip">Matthys et al. (2024)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Define red tape using Bozeman's (2000) foundational definition. Explain the two key characteristics a rule must have to qualify as red tape, and give one example of each measurement approach (objective and subjective).</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Bozeman: red tape = rules, regulations and procedures that remain in force and entail a compliance burden but do not advance the legitimate purposes the rules were intended to serve. Two characteristics: (1) Compliance burden — high effort/time required to comply; (2) Lack of functionality — the rule fails to serve its intended purpose. Objective measurement: count the number of steps, forms, or days required to complete a specified process (e.g., verifying how many forms are needed to register a new business). Subjective measurement: survey employees — e.g., "The rules and procedures in my organization make it difficult to get my work done" (Likert scale).</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">All organizations can experience internal red tape, but governments are typically the main source of external red tape. Explain this statement using OPA, NPM, and NPG as drivers of red tape.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Internal red tape affects any organization (rules born bad or gone bad). External red tape flows from government to third parties. OPA generated red tape through its emphasis on equal treatment — standardized rules for every situation created compliance burden without proportionate benefit. NPM paradoxically increased red tape while claiming to reduce it: more performance accountability, more contracting rules, more reporting requirements, and the hollow state created multiple governmental layers each adding rules. NPG added further layers through governance networks — co-production and multi-actor arrangements require rules to coordinate actors, adding to the cumulative burden.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Based on the meta-analysis by George et al. (2021), assess the empirical evidence on the effects of red tape on organizational performance and employee outcomes. Under what conditions are these effects strongest, and what are the managerial implications?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">George et al. find a significant, negative, small-to-medium effect of red tape on both organizational performance (efficiency, effectiveness) and employee outcomes (job satisfaction, motivation). Mechanisms: red tape hampers recruitment/retention of qualified staff; prevents managers from accessing timely performance information; and reduces employee discretion, lowering motivation. Conditions where effects are strongest: internal red tape (directly influenced by leadership, so more salient); single-source data (CMB inflates effect sizes, so multi-source findings are more reliable); public sector (vs. private). Managerial implications: reducing red tape is worthwhile but requires sustained attention (it tends to re-accumulate); internal red tape offers more leverage than external; distinguish between rules that burden without purpose vs. rules that serve a genuine safeguarding function.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 7 -->
+<div class="section" id="l7">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 07 — Guest Lecture</div>
+    <h2>Strategic Management &amp; Planning</h2>
+    <p class="subtitle">Prof. dr. Kenn Meyfroodt · Theoretical grounding, resource-based view, behavioral strategy, and public sector context.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Mission · Vision · Goals</span>
+      <span class="meta-pill">Resource-Based View</span>
+      <span class="meta-pill">Bryson et al. 2007</span>
+      <span class="meta-pill">Nutt &amp; Backoff 1993</span>
+      <span class="meta-pill">Behavioral Strategy</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Vocabulary of Strategy (Johnson et al., 2008)</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Mission</div><div class="node-text">Overriding purpose in line with values or expectations of stakeholders</div></div>
+      <div class="mind-node"><div class="node-label">Vision</div><div class="node-text">Desired future state — the aspiration of the organization</div></div>
+      <div class="mind-node"><div class="node-label">Goal</div><div class="node-text">General statement of aim or purpose</div></div>
+      <div class="mind-node"><div class="node-label">Objective</div><div class="node-text">Quantification or precise statement of the goal</div></div>
+      <div class="mind-node"><div class="node-label">Strategy</div><div class="node-text">Long-term direction · Aligning aspirations and capabilities</div></div>
+      <div class="mind-node"><div class="node-label">Control</div><div class="node-text">Monitoring action steps — assess effectiveness, modify as necessary</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>What is Strategic Management? (Poister &amp; Streib, 1999)</h3>
+    <div class="def-box">
+      <div class="def-label">Conceptualizing Strategy (George, 2021)</div>
+      <div class="def-text">Strategy answers three questions: WHY (public value creation), WHAT (goal achievement), and HOW (aligning aspirations and capabilities). It is a holistic process, not a single planning exercise. Strategy is not something a public organization "has" but something it actively "does."</div>
+    </div>
+    <p>Strategic management is characterized by "Babylonian confusion of tongues" — the terms mission, vision, strategy, plan are used inconsistently across both practice and research. The vocabulary above (Johnson et al.) provides a shared framework.</p>
+  </div>
+
+  <div class="content-block">
+    <h3>Approaches to Strategic Management (Nutt &amp; Backoff, 1993)</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Analytical Approach (Problem focus)</h4>
+        <ul>
+          <li>Portfolio approaches (BCG matrix etc.)</li>
+          <li>Industry analysis (Porter's five forces)</li>
+          <li>Rational planning systems</li>
+          <li>Systematic, stepwise, chronological</li>
+          <li>Formalised design approach</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Actor &amp; Agency Focus</h4>
+        <ul>
+          <li>Stakeholder analysis and management</li>
+          <li>Interpretative and adaptive strategy</li>
+          <li>Issue management</li>
+          <li>Strategic leadership (leader's personality and reputation central)</li>
+          <li>Politicized strategic management: negotiation &amp; power</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Four Strategic Logics (Idenburg, 1992)</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>High Goal / Low Process → Rational planning</h4>
+        <ul>
+          <li>Clear objectives, formal sequential steps</li>
+          <li>Risk: inflexible in turbulent environments</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>High Goal / High Process → Logical incrementalism</h4>
+        <ul>
+          <li>"You learn as you go" — purposeful but adaptive</li>
+          <li>Clear vision updated by experience and learning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Low Goal / High Process → Learning organization</h4>
+        <ul>
+          <li>Continuous innovation based on knowledge and competences</li>
+          <li>Vision-oriented culture; emergent not planned</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Low Goal / Low Process → Ad hoc / Imposed</h4>
+        <ul>
+          <li>Strategy externally imposed at a higher level</li>
+          <li>Can be both a curse (loss of autonomy) and a blessing (clarity)</li>
+          <li>In reality: <em>combinations</em> of logics are most common</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Resource-Based View (Bryson et al., 2007)</h3>
+    <p>The RBV is an "inside-out" approach: competitive advantage comes from the resources and capabilities an organization already has, not just from analyzing the external environment (Porter's "outside-in" five forces approach).</p>
+    <div class="def-box">
+      <div class="def-label">In the Public Sector</div>
+      <div class="def-text">Public organizations must identify and build strategic capabilities that enable them to produce as much public value as possible at a responsible cost. Neglecting these capabilities results in struggling to achieve objectives, creating little public value, responding imperfectly to environmental changes, and facing legitimacy challenges.</div>
+    </div>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Resources:</strong> Any assets the organization might draw on to achieve its goals — e.g., strengths in a SWOT analysis.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Competencies:</strong> A subset of resources — abilities, sets of actions, technologies, or processes that help perform well.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Distinctive competencies:</strong> Very difficult for others to replicate — uniqueness, rarity, inimitability, value. Source of enduring advantage.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Core distinctive competency:</strong> A distinctive competency whose presence is crucial for goal achievement — remove it, and goal achievement is unlikely.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Livelihood Scheme (Bryson et al., 2007)</h3>
+    <p>A practical tool that maps the relationship between critical success factors, resources, and competencies — linking what must be done (CSFs) to what the organization is capable of doing.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Process (7 steps):</strong> Preparation → Tentative mission and goal system → Identify CSFs → Identify distinctive competencies → Create full livelihood scheme → Develop strategic plan → Develop annual business plan.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Critical Success Factors:</strong> Things the organization must do, criteria it must meet, KPIs it must perform against. The external demand side.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Value–rarity–organizational embeddedness–imperfect imitability:</strong> The four characteristics that make a resource strategically valuable (Barney, 2001).</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Strategic Management in the Public Sector Context</h3>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Political Component</h4>
+        <ul>
+          <li>Guiding principles often vaguer than in private sector</li>
+          <li>Political timeframe: short-term over long-term</li>
+          <li>Political majority coalitions: stability matters</li>
+          <li>Politics-administration relationship shapes strategy space</li>
+          <li>Political ambiguity is structural, not accidental</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Decision-Making Processes</h4>
+        <ul>
+          <li>Transparency demands → decisions become public</li>
+          <li>Stakeholder pressure to influence strategy</li>
+          <li>Consensus decision-making and compromising</li>
+          <li>Decisions "reopened" as impact becomes clear in implementation</li>
+          <li>Publicness of debate ↔ strategic flexibility</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Public Management Component</h4>
+        <ul>
+          <li>Multitude of goals — often conflicting</li>
+          <li>Performance measurement is difficult</li>
+          <li>Intangible products and services</li>
+          <li>Diversity of target groups and stakeholders</li>
+          <li>Lack of experience with strategic management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Behavioral Strategy (Powell et al., 2011)</h3>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <div class="def-text">Behavioral strategy merges cognitive and social psychology with strategic management theory and practice. It aims to bring realistic assumptions about human cognition, emotions, and social behavior to the strategic management of organizations — enriching strategy theory, empirical research, and real-world practice.</div>
+    </div>
+    <p>Key concept: <strong style="color:var(--text)">managerial cognition</strong> — the cognitive processes by which managers acquire, interpret, and act upon information. Strategic planning decisions are not purely rational; they are shaped by biases, social dynamics, and information processing limitations. This connects to the behavioral turn in Public Administration (Grimmelikhuijsen et al., 2017).</p>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Nutt &amp; Backoff (1993)</span>
+      <span class="author-chip">Poister &amp; Streib (1999)</span>
+      <span class="author-chip">Bryson et al. (2007)</span>
+      <span class="author-chip">Johnson &amp; Scholes (2008)</span>
+      <span class="author-chip">Idenburg (1992)</span>
+      <span class="author-chip">Barney (2001)</span>
+      <span class="author-chip">Powell et al. (2011)</span>
+      <span class="author-chip">George (2021)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the vocabulary of strategic management (mission, vision, goal, objective, strategy, control) using a public sector example of your choice.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Using a public hospital as an example: Mission = "provide accessible, high-quality healthcare to all residents regardless of ability to pay." Vision = "be the leading regional hospital for patient outcomes by 2030." Goal = "reduce waiting times in emergency care." Objective = "reduce average ER waiting time from 4 hours to 90 minutes by December 2026." Strategy = invest in triage redesign and add nurse practitioners. Control = monthly dashboard review of waiting time data, quarterly adjustment if targets are missed. The key is showing how these levels are hierarchically linked and how each becomes more specific and actionable as you move down.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Using the approaches identified by Nutt &amp; Backoff (1993) and Idenburg, discuss how strategic management in public organizations differs from the private sector. Why is a purely analytical approach to strategy insufficient in the public sector context?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Nutt &amp; Backoff identify three types: analytical (portfolio, industry analysis, rational planning), actor-focused (stakeholder management, interpretive strategy), and agency-focused (strategic leadership, politicized management). Idenburg adds a process dimension: rational planning (high goal / low process) vs. logical incrementalism (high goal / high process) vs. learning organization (low goal / high process). In the public sector, purely analytical approaches are insufficient because: political mandates shift with election cycles; multiple and conflicting stakeholders (not just shareholders) must be satisfied; democratic accountability constrains strategic choices that would be routine in business; and wicked issues (cross-cutting, intractable) resist analytical decomposition. Public strategy is inherently political — it requires astuteness, coalition-building, and legitimacy management alongside analytical planning. In reality, combinations of approaches are used.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 8 -->
+<div class="section" id="l8">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 08</div>
+    <h2>Managing Politicians</h2>
+    <p class="subtitle">From the great divide to political astuteness — navigating the politics-administration interface.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Principal-agent theory</span>
+      <span class="meta-pill">Political astuteness</span>
+      <span class="meta-pill">Hartley et al. 2014</span>
+      <span class="meta-pill">Guerrilla government</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Old View</div><div class="node-text">Politics and administration are separate worlds · Politicians decide, bureaucrats implement · Double principal-agent problem</div></div>
+      <div class="mind-node"><div class="node-label">Modern View</div><div class="node-text">Administration gains importance · Wicked issues require collaboration · Not a line but a zone</div></div>
+      <div class="mind-node"><div class="node-label">Political Astuteness</div><div class="node-text">Active sense-making · Securing mandates · Enlisting operational capacity · Boundary-spanning</div></div>
+      <div class="mind-node"><div class="node-label">Guerrilla Government</div><div class="node-text">Public servants disobeying superiors to do what they perceive as 'right' — dark side of public management</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Great Divide — Old View</h3>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Politics (Normative)</h4>
+        <ul>
+          <li>Passionate &amp; normative — policymaking</li>
+          <li>Politicians: may prolong their power (self-interest)</li>
+          <li>Rogue principals — renege on authority constraints</li>
+          <li>Rotate in, lack expert knowledge</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Administration (Rational)</h4>
+        <ul>
+          <li>Rational, neutral, equal — implementing policy</li>
+          <li>Public managers: may advance their career (self-interest)</li>
+          <li>Agents gone bad — use discretion against principal's goals</li>
+          <li>Expert knowledge but risk of capture</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">The Double Principal-Agent Problem</div>
+      <div class="callout-text">Central assumption: actors behave out of self-interest. Politicians and public managers both face incentives to deviate from the public interest. Information asymmetry (expert knowledge vs. rotational knowledge; state vs. street) makes monitoring difficult — requiring both internal and external control mechanisms.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Bureaucracy's Response — Protecting Against Rogue Principals</h3>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Expert bureaucrats through specialized training:</strong> Expertise gives public managers authority to push back — not just on technical grounds but as a professional obligation.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Integrity norms:</strong> Instill a set of norms that regulate the political-administrative relationship. Knowing when to be unresponsive is as important as knowing when to respond.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Merit-based advancement:</strong> Protects public managers from political retaliation when they choose normative constraints over responsiveness.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Responsiveness vs. Normative Constraints — Dilemmas (Christensen &amp; Opstrup, 2017)</h3>
+    <p>The tension between responsiveness (doing what politicians want) and normative constraints (upholding professional and legal standards) plays out differently depending on context. Constraining norms are not clearly written down — different people adhere to different norms.</p>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Country / Admin. Tradition</h4>
+        <ul>
+          <li>Different expectations of neutrality</li>
+          <li>Scandinavian vs. Mediterranean traditions</li>
+          <li>Westminster vs. continental models</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Organizational Characteristics</h4>
+        <ul>
+          <li>Resource munificence vs. scarcity</li>
+          <li>Advisory role (ministry/cabinet) vs. implementing role (agency/department)</li>
+          <li>Proximity to political principal matters</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Individual Characteristics</h4>
+        <ul>
+          <li>Educational background</li>
+          <li>Higher hierarchical position → more exposure to political pressure</li>
+          <li>Generalist vs. specialist orientation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-box">
+      <div class="def-label">Real-world example — Jim Mattis &amp; Trump (Woodward, 2018)</div>
+      <div class="def-text">Bob Woodward's book reports that Defense Secretary Mattis compared Trump to a "fifth or sixth grader" in terms of strategic understanding. Mattis repeatedly resisted or delayed presidential orders he viewed as professionally or legally untenable — a textbook example of the responsiveness vs. normative constraints dilemma played out at the highest level. Eventually resigned when the tension became irreconcilable. This illustrates that the dilemma affects even the most senior political appointees.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Beyond the Divide — Modern View</h3>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Government has grown strongly</strong> — difficult for politicians to maintain overview. Training rate of civil servants has greatly increased; expertise gap has widened.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Contractualization and agencies</strong> — remote tasks require managers to exercise judgment in ambiguous authority structures with limited day-to-day political oversight.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Wicked issues</strong> — cross-cutting, intractable problems (poverty, climate, migration) cannot be solved instrumentally; they require expert judgment, political navigation, and network coordination simultaneously.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Not a line but a zone:</strong> The politics-administration boundary is dynamic — it changes according to situation, history, issues, and the personalities involved. More often ally than opponent.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Political Astuteness (Hartley et al., 2014)</h3>
+    <p>Mixed-methods research: survey + interviews with senior and middle public managers in Australia, UK &amp; New Zealand. Questions: to what extent are public managers "political"? How legitimate is this?</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Active sense-making:</strong> Public managers test the waters — "is this what you want to happen?" They disentangle the bigger picture and have an intelligent understanding of politicians' worldview and their political reality. The public manager as sparring partner safeguarding public value.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Securing a mandate:</strong> Mandates are negotiated, adapted, and sometimes bartered — not simply received. Managers act as proxy for politicians in relationship-building with stakeholders. They explain policy so stakeholders may disagree but understand the thinking behind it.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Enlisting operational capacity:</strong> Understand power (im)balances, factions, and subgroups within the organization and its environment. Build coalitions. The public manager as boundary spanner.</div></div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Legitimacy question</div>
+      <div class="callout-text">Public managers are appointed, not democratically elected — so their "political" activity raises accountability questions. But evidence shows political activities are typically constructive, in support of policymakers. A further complication: politicians sometimes do not know exactly what they want, calling for expert knowledge as well as political judgment. The relationship is more often ally than opponent.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Guerrilla Government — From Collaboration to Conflict</h3>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <div class="def-text">Public servants disobeying the wishes of their superiors — either directly or indirectly communicated — to do what they perceive is the "right thing." Weaponizing discretion for ethical ends. The dark side of public management.</div>
+    </div>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Wide array of strategies — from passive to active:</strong> Delaying, slow-rolling, selective implementation, leaking to the press, whistleblowing, formal complaints, resignation. Not all guerrilla activity is created equal — some is ethically justified; some undermines democratic accountability.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>The ethical question:</strong> What is "right" when professional norms conflict with political instructions? The guerrilla government literature forces a confrontation with the limits of neutrality and the obligations of professional expertise.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Last resort principle:</strong> A good pitch goes a long way — making the professional case effectively through legitimate channels is always the first response. Guerrilla activity is justified only when legitimate channels are exhausted and fundamental norms are at stake.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Hartley et al. (2014)</span>
+      <span class="author-chip">Christensen &amp; Opstrup (2017)</span>
+      <span class="author-chip">Woodward (2018)</span>
+      <span class="author-chip">Moore (1995) — strategic triangle</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the "double principal-agent problem" in the politics-administration relationship. What mechanisms does bureaucracy use to address this problem?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">The double principal-agent problem: both politicians (principals) and public managers (agents) have self-interested incentives that may diverge from the public interest. Politicians may "go rogue" — overstepping legal authority or making politically motivated decisions. Public managers may "go bad" — using their information advantage and discretion to advance their career rather than the principal's goals. Information asymmetry (expert knowledge vs. rotational knowledge; state vs. street) makes monitoring difficult in both directions. Bureaucratic mechanisms to address this: specialized training to create expert-bureaucrats who resist political interference; integrity norms regulating the political-administrative relationship; merit-based advancement protecting civil servants from political retaliation; and both internal and external control mechanisms.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Using Hartley et al. (2014), evaluate the concept of political astuteness. To what extent is it legitimate for public managers to be "political" in their work? Use the public value framework to structure your argument.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Hartley et al. find that public managers are actively political through: sense-making and testing mandates with politicians; negotiating/adapting mandates with stakeholders; building coalitions to enlist operational capacity. This is mostly constructive, not adversarial. Legitimacy argument via public value framework: to create public value, managers must align the authorizing environment (politicians, resource holders), the task environment, and operational capabilities — this requires political astuteness by definition. If managers are purely neutral implementers, they cannot effectively navigate the authorizing environment. Counter-argument: public managers are appointed, not elected — political activity risks overstepping democratic mandate. Resolution: the line is not fixed but a dynamic zone; political activity is legitimate when it serves public value creation and maintains accountability, but becomes problematic when managers substitute their own preferences for elected mandates (see guerrilla government).</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 9 -->
+<div class="section" id="l9">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 09</div>
+    <h2>Managing Street-Level Bureaucrats</h2>
+    <p class="subtitle">Pay-for-performance, public service motivation, and the threat of policy alienation.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">PSM</span>
+      <span class="meta-pill">Policy Alienation</span>
+      <span class="meta-pill">Tummers et al. 2009</span>
+      <span class="meta-pill">George &amp; Van der Wal 2023</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">SLBs</div><div class="node-text">Front-line public service workers with high discretion — different from public managers in responsibilities and visibility</div></div>
+      <div class="mind-node"><div class="node-label">Pay-for-Performance</div><div class="node-text">NPM solution · Double-edged sword · Small effect at best · Not a silver bullet</div></div>
+      <div class="mind-node"><div class="node-label">PSM</div><div class="node-text">Intrinsic motivation to serve society · 4 dimensions · Strong predictor of performance</div></div>
+      <div class="mind-node"><div class="node-label">Policy Alienation</div><div class="node-text">Powerlessness + Meaninglessness · Process and content dimensions · Threatens PSM</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Who Are Street-Level Bureaucrats?</h3>
+    <p>SLBs are frontline public service workers who interact directly with citizens and exercise discretion in how they apply policy. Classic examples: teachers, social workers, police officers, welfare officers, immigration officials, doctors in public hospitals.</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>SLBs (Lipsky)</h4>
+        <ul>
+          <li>Direct interaction with citizens</li>
+          <li>High discretion in applying rules</li>
+          <li>Effectively make policy through day-to-day decisions</li>
+          <li>Subject to both organizational rules and individual judgment</li>
+          <li>Face resource constraints and competing demands</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Public Managers (comparison)</h4>
+        <ul>
+          <li>Top, middle, or line management level</li>
+          <li>Set strategy, allocate resources, manage organizations</li>
+          <li>No direct citizen interaction in delivering services</li>
+          <li>Focus on organizational performance and goal formulation</li>
+          <li>Different accountability and skill requirements</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Pay-for-Performance — A Double-Edged Sword</h3>
+    <p>NPM's answer to motivating SLBs: look to the business sector — monetary incentives and high organizational control. Not marginal: 2/3 of civil servants in the developed world are covered by some form of pay-for-performance (OECD).</p>
+    <div class="compare-grid">
+      <div class="compare-col pro">
+        <h4>Arguments For</h4>
+        <ul>
+          <li>Reduces goal ambiguity — clarity on what matters</li>
+          <li>Strengthens employee motivation (under conditions)</li>
+          <li>Strengthens organizational performance (under conditions)</li>
+          <li>Links pay to results rather than seniority alone</li>
+        </ul>
+      </div>
+      <div class="compare-col con">
+        <h4>Arguments Against</h4>
+        <ul>
+          <li>"Hitting the target but missing the point"</li>
+          <li>Everything not measured becomes invisible — perverse incentives</li>
+          <li>Creaming: select easy cases to hit metrics</li>
+          <li>Parking: neglect hard cases that hurt scores</li>
+          <li>Crowds out Public Service Motivation (PSM)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Meta-Analysis (George &amp; Van der Wal, 2023)</div>
+      <div class="callout-text">Impact is positive under particular conditions (federal government, Asian countries, employee outcomes) but small "at best." Not a silver bullet — rather a strategic thought exercise. Requires careful contextual calibration before implementation.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Korean Ministry Case — Non-Monetary Rewards</h3>
+    <p>Exercise in class: given potential negative behavioral consequences of performance-based pay among Korean public servants, what other ways exist to reward excellent performance?</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Promotion and job transfers:</strong> Advancement within the organization as recognition — particularly valued in hierarchical cultures like Korea where seniority and rank carry significant prestige.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Training &amp; education:</strong> Investing in an SLB's development as a signal of value and future potential — particularly attractive for those motivated by competence and growth.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Public reputation and recognition:</strong> "Public manager of the year," "public talent of the year," lifetime achievement awards. Social recognition leverages PSM — doing good publicly reinforces intrinsic motivation.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Beneficiary contact (Lesson 4):</strong> The telephone fundraiser experiment — group that met scholarship recipients raised significantly more ($$$) than the group that had no such contact ($). Direct connection to impact is a powerful, free motivational tool.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Public Service Motivation (PSM)</h3>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <div class="def-text">An individual's orientation to delivering services to people with a purpose to do good for others and society.</div>
+    </div>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Self-sacrifice (avg. 3.39):</strong> Personal sacrifice to do good for others. Willingness to forgo private gain for the common good.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Attraction to public participation (avg. 4.25 — highest):</strong> PSOs as a suitable and meaningful stage for public service — distinct from volunteer work in its institutional setting.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Commitment to public values (avg. 4.07):</strong> Acting upon incorporated values like social responsibility, democracy, and fairness — values that are internalised, not just endorsed.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Compassion (avg. 3.56):</strong> Genuine concern for people, groups, or objects one wants to serve — the emotional foundation of public service work.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Four Lessons for Managing PSM</h3>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lesson 1 — Select for PSM:</strong> Strong correlation with performance and goal fulfilment, yet hiring processes focus mainly on skills, abilities, and knowledge. Select-in: score CVs on PSM indicators (prior voluntary work, critical incidents). Select-out: salary as primary motivation is a red flag.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lesson 2 — Socialize newcomers:</strong> On-boarding and orientation initiatives that connect new SLBs to the organization's public service mission. Encourage mentoring systems. Leaders should embody and model public service values — not just manage by metrics.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lesson 3 — Create supportive work environments:</strong> Nurture constructive communication and performance feedback. Strengthen perceptions of autonomy and competence. Purge PSM-crowding practices: pay-for-performance, excessive job stressors, daily strain.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Lesson 4 — Connect to beneficiaries:</strong> Identify who benefits from specific jobs, programs, and organizational missions. Create opportunities for direct contact. Provide clear channels for beneficiary feedback. The scholarship fundraiser study: meeting beneficiaries increased donations dramatically.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Policy Alienation (Tummers et al., 2009)</h3>
+    <p>Policy alienation is a key threat to PSM: it occurs when SLBs feel estranged from the policy they are asked to implement — either because of how it was made (powerlessness) or what it requires (meaninglessness).</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Powerlessness — Process dimension</h4>
+        <ul>
+          <li>No control over implementation (how?)</li>
+          <li>Translation from policy to targets imposed top-down</li>
+          <li>Resource/personnel allocation decisions excluded from</li>
+          <li>Performance management systems aimed at control, not learning</li>
+          <li>Remedy: participation through workgroups, surveys, consultation rounds — giving voice AND being heard</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Meaninglessness — Content dimension</h4>
+        <ul>
+          <li>Policy makes no sense (what &amp; so what?)</li>
+          <li>The organization's contribution seems senseless</li>
+          <li>My individual contribution seems irrelevant</li>
+          <li>Three levels: policy, organization, individual</li>
+          <li>Remedy: active sense-making by management — engage in clarifying the purpose</li>
+        </ul>
+      </div>
+    </div>
+    <div class="def-box">
+      <div class="def-label">Dutch disability welfare reform case (2004)</div>
+      <div class="def-text">Large increase in welfare recipients (10% of total workforce) → stricter reassessment rules → insurance doctors and labour experts asked to implement. Powerlessness: doctors not consulted in policy formulation phase; little voice or discretion within the agency (big organization, major lay-offs, hierarchical culture, pressure to award jobs). Meaninglessness: official objective was "healthy to be active" but the actual operation was "money needs to be saved" — doctors felt they were making people work when they were genuinely disabled. Both dimensions combined → severe policy alienation → poor implementation quality.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Lipsky (SLBs)</span>
+      <span class="author-chip">George &amp; Van der Wal (2023)</span>
+      <span class="author-chip">Tummers et al. (2009)</span>
+      <span class="author-chip">OECD (P4P prevalence)</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">What are the four dimensions of Public Service Motivation (PSM)? What does research suggest about the relationship between PSM and organizational performance?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">The four PSM dimensions: (1) Self-sacrifice — personal sacrifice to do good for others (avg. 3.39); (2) Attraction to public participation — PSOs as a stage for public service, highest avg. at 4.25; (3) Commitment to public values — acting on values like social responsibility, democracy, fairness (avg. 4.07); (4) Compassion — concern for people and groups one serves (avg. 3.56). Research shows a strong positive correlation between PSM and both employee performance and organizational goal fulfilment — but hiring processes mainly focus on skills and knowledge rather than PSM, missing this predictor. PSM can also be crowded out by extrinsic incentives like pay-for-performance.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the two dimensions of policy alienation (powerlessness and meaninglessness). Using one case from the lecture, illustrate how policy alienation can develop in practice.</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Powerlessness (process dimension): SLBs lack control over how policy is implemented — no voice in target-setting, resource allocation, or performance management system design. Meaninglessness (content dimension): the policy itself seems senseless (policy makes no sense), or the organization's contribution seems pointless, or the individual's contribution feels irrelevant. Dutch disability reform case: insurance doctors were not consulted during policy formulation (powerlessness), then asked to implement stricter reassessment rules they found harmful and contradictory to their professional ethics — reassessing people's disabilities primarily to save money rather than assess health (meaninglessness). Result: policy alienation threatened both PSM and quality of implementation.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Critically evaluate pay-for-performance as a motivation tool for street-level bureaucrats. Drawing on the meta-analysis (George &amp; Van der Wal, 2023) and the concept of Public Service Motivation, under what conditions might pay-for-performance be counterproductive?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Arguments for P4P: reduces goal ambiguity, strengthens motivation and performance under certain conditions. Evidence (George &amp; Van der Wal): impact is small at best; works better in federal government, Asian countries, and for employee-level outcomes; not a silver bullet. Counterproductive conditions: (1) When PSM is high — P4P shifts focus from intrinsic motivation (doing good) to extrinsic reward, crowding out PSM. Research shows P4P can be an antidote for PSM. (2) When performance is multi-dimensional and hard to measure — "hitting the target but missing the point"; everything not measured disappears. (3) When creaming and parking emerge — SLBs select easy cases (creaming) and neglect harder ones (parking) to hit metrics. (4) When organizational culture is already mission-driven — introducing monetary signals sends a contradictory message. Conclusion: P4P requires careful contextual calibration; for SLBs with high PSM in complex service settings, alternative motivators (beneficiary contact, autonomy, public recognition) are often more effective.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LECTURE 10 -->
+<div class="section" id="l10">
+  <div class="hero">
+    <div class="lecture-badge">Lecture 10</div>
+    <h2>Managing Citizens</h2>
+    <p class="subtitle">Administrative burden, co-production, and the evolving role of citizens as customers and co-producers.</p>
+    <div class="meta-pills">
+      <span class="meta-pill">Administrative burden</span>
+      <span class="meta-pill">Co-production</span>
+      <span class="meta-pill">Voorberg et al. 2017</span>
+      <span class="meta-pill">Herd &amp; Moynihan 2018</span>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>Mind Map</h3>
+    <div class="mind-map-grid">
+      <div class="mind-node"><div class="node-label">Admin. Burden</div><div class="node-text">Costs &amp; barriers citizens face with the state · Can be accidental or intentional · Three types: learning, compliance, psychological</div></div>
+      <div class="mind-node"><div class="node-label">Red Tape vs. Burden</div><div class="node-text">Red tape = organizational perspective · Administrative burden = citizen perspective · Both are about dysfunctional rules</div></div>
+      <div class="mind-node"><div class="node-label">NPM Citizen</div><div class="node-text">Customer = individual choice based on purchasing power · Information asymmetry · Bad choice, your fault?</div></div>
+      <div class="mind-node"><div class="node-label">NPG Citizen</div><div class="node-text">Co-producer = active involvement in production · Co-design, co-produce, co-implement · State and governance traditions matter</div></div>
+      <div class="mind-node"><div class="node-label">Dark Side</div><div class="node-text">Deliberate rejection of responsibility · Equity concerns · Administrative traditions shape impact</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>What is Administrative Burden?</h3>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <div class="def-text">Costs and barriers citizens experience in their interaction with the state — can be accidental or intentional (e.g., abortion policy in the US where 1/3 of restrictions create burden by design).</div>
+    </div>
+    <div class="three-col">
+      <div class="compare-col neutral1">
+        <h4>Learning Costs</h4>
+        <ul>
+          <li>Energy to find information</li>
+          <li>How to navigate service delivery</li>
+          <li>Establishing eligibility</li>
+          <li>Learning the application process</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Compliance Costs</h4>
+        <ul>
+          <li>Energy to comply with rules</li>
+          <li>Forms, waiting times, required documentation</li>
+          <li>Data already provided to other programs</li>
+          <li>Difficulty finding help</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral3">
+        <h4>Psychological Costs</h4>
+        <ul>
+          <li>Mental discomfort with government</li>
+          <li>Stress, fear, stigma</li>
+          <li>Spill-over from learning &amp; compliance costs</li>
+          <li>Affects take-up rates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Reducing Administrative Burden — What Works?</h3>
+    <p>The public sector's approach to reducing burden operates at two levels: behavioral nudges (change how rules are applied) vs. structural reform (change the rules themselves).</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>Reducing Learning Costs</h4>
+        <ul>
+          <li>Simplify: centralize fragmented information into one place</li>
+          <li>Support: service finders, eligibility calculators (e.g., Services Australia; Flemish renovation subsidy portal)</li>
+          <li>Reach out: proactive contact with eligible beneficiaries rather than waiting for them to apply</li>
+          <li>Key actions: simplify, support, and reach out</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>Reducing Compliance &amp; Psychological Costs</h4>
+        <ul>
+          <li>Pre-fill forms with data already held by government</li>
+          <li>Reduce number of forms (US tax code: 833 codes!)</li>
+          <li>Change tone of voice in communications → faster payments, higher compliance</li>
+          <li>Default options ("nudging") — opt-out rather than opt-in</li>
+          <li>Respectful, non-stigmatizing interaction design</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Limit of nudging</div>
+      <div class="callout-text">Behavioral PA (nudging, default options, tone of voice) can mitigate burden at the margins but foregoes structural inequality. It addresses symptoms, not causes. Supporting third-party organizations (NPOs, volunteer services like Debt Aid Buddy) that assist vulnerable citizens is a more structural complement — but creates its own accountability questions.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Debt Aid Buddy — Missing Link Between Policy and Practice</h3>
+    <p>Second-largest debt counselling volunteer organization in the Netherlands. 2,800+ active volunteers/year. Goal: guide people to financial independence by navigating them through administrative burdens. Context: 7.6% of Dutch households have problematic debts.</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Streamlining implementation:</strong> Collaboration with local governments to set up a "money counter" — grouping all financial services into one counter to reduce compliance fragmentation.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Challenging implementation:</strong> Volunteers identify where policy creates unnecessary burden and flag it through both formal channels (reporting/committees) and informal ones (direct calls to civil servants).</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Influencing policy:</strong> Short feedback loops allow the organization to participate in shaping policy — a form of co-production that goes beyond service delivery into governance. Fine line between "helping" and "taking over" from the government.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Citizens as Customers vs. Co-producers</h3>
+    <p>Citizens became more critical as political actors over time due to higher education levels and digitalization. Which model applies depends entirely on the reform paradigm in use.</p>
+    <div class="compare-grid">
+      <div class="compare-col neutral1">
+        <h4>NPM — Citizens as Customers</h4>
+        <ul>
+          <li>Individual choice based on purchasing power</li>
+          <li>Demand-driven services (e.g., cash-for-care)</li>
+          <li>Tripadvisor for elderly care: quality feedback, but 94% occupancy rate limits real choice</li>
+          <li>"Bad choice, your fault?" — structural disadvantages ignored</li>
+          <li>Information asymmetry: vaguer quality standards than restaurants</li>
+        </ul>
+      </div>
+      <div class="compare-col neutral2">
+        <h4>NPG — Citizens as Co-producers</h4>
+        <ul>
+          <li>Co-creation = "active involvement of end-users in various stages of the production process" (Voorberg et al., 2015)</li>
+          <li>Not new — but more formally institutionalized under NPG</li>
+          <li>Spectrum: advisory council → deciding citizen panel → advisory referendum → deciding referendum</li>
+          <li>Who decides is itself a political choice</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Individual vs. organized citizens</div>
+      <div class="callout-text">An important distinction for co-production: individual citizens and organized citizens (civic organizations, associations, social movements) respond differently. Organized citizens have more capacity to participate but may not represent the most vulnerable. Individual citizens may be the intended beneficiaries but often lack the time and resources for sustained participation.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Co-production and Administrative Traditions (Voorberg et al., 2017)</h3>
+    <p>Research question: do different state and governance traditions lead to different approaches to and impacts of co-production?</p>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Multi-level government as a barrier:</strong> More governmental layers → more coordination problems → harder to implement co-production consistently. Fragmentation undermines the network coherence co-production requires.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Government support as catalyst:</strong> When government is supportive and co-production is institutionally embedded, impact is significantly higher. The institutional context shapes outcomes more than the co-production design itself.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Logical next step? Not always.</strong> Co-production is not a universal solution — its effectiveness is highly contingent on administrative tradition, governance structure, and available civil society capacity.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>The Dark Side of Co-production</h3>
+    <div class="fact-list">
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Deliberate rejection of responsibility:</strong> "Civic action" as cover for government retreat — the "doe-democratie" (DIY democracy) allows public services to be minimized under the guise of empowering citizens.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Failing accountability:</strong> Clear lack of responsibilities — when citizens co-produce, who is responsible when things go wrong? Democratic accountability becomes blurred.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Rising transaction costs:</strong> Many meetings, adverse reactions, delays, non-show ups — co-production can be more expensive than direct government delivery.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Loss of critical voice:</strong> Involving critical citizens in a participatory trajectory can make them less critical — co-optation risk.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Reinforced inequalities:</strong> Who participates? Consistently those who are already more educated, resourced, and organized. Vulnerable groups are systematically underrepresented.</div></div>
+      <div class="fact-item"><div class="fact-icon"></div><div class="fact-text"><strong>Co-destruction of public value:</strong> Through missed opportunities, role misuse, and competing agendas, co-production can destroy rather than create public value.</div></div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3>Key Authors</h3>
+    <div class="authors-grid">
+      <span class="author-chip">Voorberg et al. (2017)</span>
+      <span class="author-chip">Herd &amp; Moynihan (2018)</span>
+      <span class="author-chip">Tummers (Debt Aid Buddy)</span>
+      <span class="author-chip">Behavioral PA — Grimmelikhuijsen et al.</span>
+    </div>
+  </div>
+
+  <div class="exam-section">
+    <h3>Practice &amp; Exam Questions</h3>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">Explain the three types of administrative burden (learning costs, compliance costs, psychological costs). How do these differ from red tape, and why does this distinction matter for equity?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Learning costs: the energy citizens must expend to find out about a program and understand how to navigate it. Compliance costs: the effort to actually comply — filling forms, meeting waiting times, providing documentation, attending required appointments. Psychological costs: the stress, stigma, and mental discomfort arising from the first two. Difference from red tape: red tape is primarily perceived from an organizational/employee perspective; administrative burden is the citizen-side experience of the same dysfunctional rules. Equity matters because burden is not neutral — burden perceptions vary across populations. Citizens with less education, less time, or less trust in government face higher effective barriers even when formal rules are identical. This means administrative burden can systematically exclude the most vulnerable citizens from services designed to help them.</div>
+    </div>
+    <div class="exam-q knowledge">
+      <div class="q-type">Knowledge · 5 pts</div>
+      <div class="q-text">How do NPM and NPG understand the role of the citizen differently? What are the key limitations of the "customer" model of citizenship?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">NPM: citizen as customer — individual choice based on purchasing power, demand-driven services (e.g., cash-for-care), competition between service providers. NPG: citizen as co-producer — active involvement in various stages of the production process (co-design, co-implement, co-evaluate). Limitations of the customer model: (1) Information asymmetry — citizens often cannot assess quality in advance (e.g., elderly care), undermining genuine choice. (2) Choice is constrained in practice — with 94% occupancy rates in elderly homes, "choice" is often theoretical. (3) "Bad choice, your fault?" — attributing poor outcomes to individual consumer decisions ignores structural inequalities. (4) Citizens are not just consumers of individual services but also collective rights-holders whose choices affect others — the customer frame misses the collective dimension of citizenship.</div>
+    </div>
+    <div class="exam-q essay">
+      <div class="q-type">Essay · 10 pts</div>
+      <div class="q-text">Using Voorberg et al. (2017), assess the impact of co-production on public service delivery. Under what conditions is co-production effective, and what are the risks associated with over-reliance on citizen participation?</div>
+      <button class="hint-btn" onclick="toggleHint(this)"><span class="hint-arrow">▶</span> Hint for an answer</button>
+      <div class="hint-answer">Voorberg et al. find that co-production impact varies significantly by state and governance tradition: when government is supportive, co-production can be a strong catalyst for improved delivery; multi-level governance structures act as barriers, fragmenting coordination. Effective conditions: government support and clear institutional backing; well-defined roles for citizens and government; capacity support for citizens who cannot self-organize (e.g., Debt Aid Buddy model). Risks of over-reliance: (1) Deliberate rejection of government responsibility — using "civic action" as cover for cutting public services. (2) Equity gap — organized citizens (educated, well-resourced) are more able to co-produce, potentially reinforcing inequality. (3) Administrative tradition lock-in — co-production that works in Nordic contexts may not transfer to more hierarchical traditions. (4) Accountability deficit — when citizens produce services, democratic accountability becomes blurred. The conclusion is that co-production is a promising complement to, not replacement for, state delivery.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function toggleHint(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('visible');
+  answer.classList.toggle('visible', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.childNodes[1].textContent = isOpen ? ' Hint for an answer' : ' Hide hint';
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const sectionMap = {
+    home: 0, l1: 1, l2: 2, l3: 3, l4: 4, l5: 5, l6: 6, l7: 7, l8: 8, l9: 9, l10: 10
+  };
+  const items = document.querySelectorAll('.nav-item');
+  const idx = sectionMap[id];
+  if (items[idx]) items[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Hash routing
+function handleHash() {
+  const hash = window.location.hash.slice(1);
+  if (hash && document.getElementById(hash)) show(hash);
+}
+window.addEventListener('hashchange', handleHash);
+handleHash();
+</script>
+</body>
+</html>
